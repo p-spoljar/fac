@@ -1,0 +1,339 @@
+/* Réinitialisation globale */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corps du document */
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.2;
+    color: #2c3e50;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+/* Conteneur principal */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 40px 60px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Titres */
+h1 {
+    color: #1a365d;
+    font-size: 2em;
+    margin-bottom: 10px;
+    border-bottom: 3px solid #2c5aa0;
+    padding-bottom: 10px;
+}
+
+h2 {
+    color: #2c5aa0;
+    font-size: 1.5em;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    border-left: 5px solid #2c5aa0;
+    padding-left: 15px;
+    margin-left: 1ch; /* retrait "1 espace" visuel */
+}
+
+h3 {
+    color: #34495e;
+    font-size: 1.2em;
+    margin-top: 25px;
+    margin-bottom: 12px;
+    margin-left: 2ch; /* retrait "2 espaces" */
+    font-weight: 600;
+}
+
+h4 {
+    color: #34495e;
+    font-size: 1.05em;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    margin-left: 3ch; /* retrait "3 espaces" */
+}
+
+h5 {
+    color: #555;
+    font-size: 1em;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-style: italic;
+    margin-left: 4ch; /* retrait "4 espaces" */
+}
+
+/* Paragraphes et listes */
+p {
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+ul {
+    margin-left: 30px;
+    margin-bottom: 15px;
+    line-height: 1.3;
+    list-style-type: disc;
+}
+
+/* listes imbriquées, par ex. plan du cours MS2 */
+ul ul {
+    margin-top: 5px;
+    margin-left: 20px;
+    list-style-type: circle;
+}
+
+li {
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+/* Liens */
+a {
+    color: #2c5aa0;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(44,90,160,0.4);
+}
+
+a:hover,
+a:focus {
+    color: #1a365d;
+    border-bottom-color: #1a365d;
+    text-decoration: none;
+}
+
+/* Bouton/lien de support PDF ("Télécharger le support de cours") */
+.support {
+    display: inline-block;
+    font-weight: 600;
+    background-color: #2c5aa0;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border-bottom: none;
+}
+.support:hover,
+.support:focus {
+    background-color: #1a365d;
+    color: #fff;
+    border-bottom: none;
+}
+
+/* Boîtes de contenu thématiques */
+.presentation {
+    background-color: #e8f4f8;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+    border-left: 4px solid #2c5aa0;
+}
+
+.plan_du_cours {
+    background-color: #f0f4f8;
+    padding: 25px;
+    border-radius: 5px;
+    margin: 25px 0;
+}
+
+/* dans un plan de cours, les listes sous les sous-sections */
+.plan_du_cours ul {
+    margin-left: 4ch;
+    margin-bottom: 15px;
+    list-style-type: disc;
+}
+
+.plan_du_cours li {
+    margin-bottom: 6px;
+}
+
+/* textes TD / ressources TD */
+.textes_td {
+    background-color: #fafcff;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #dce6f7;
+    margin: 20px 0;
+}
+
+.textes_td ul {
+    list-style-type: disc;
+    margin-left: 30px;
+}
+
+/* compétences */
+.competences {
+    background-color: #fdf8e7;
+    padding: 20px;
+    border-radius: 5px;
+    border-left: 4px solid #d4a017;
+    margin: 25px 0;
+}
+
+.competences ul {
+    list-style-type: disc;
+    margin-left: 30px;
+}
+
+/* bibliographie / listes de références (MS1, MS2, MS3, MS4 et PageDocs) */
+.bibliographie {
+    background-color: #fafafa;
+    padding: 25px;
+    border-radius: 5px;
+    margin: 25px 0;
+    border: 1px solid #e0e0e0;
+}
+
+/* pour PageDocs.html on veut des puces personnalisées sans interligne vide entre <li> */
+.bibliographie ul {
+    list-style-type: none;
+    margin-left: 0;
+    margin-bottom: 0;
+    line-height: 1.35;
+}
+
+.bibliographie li {
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 8px; /* pas de ligne vide entre les <li>, juste un petit espace */
+}
+
+.bibliographie li:before {
+    content: "▪";
+    position: absolute;
+    left: 0;
+    color: #2c5aa0;
+    font-size: 0.9em;
+    line-height: 1;
+}
+
+/* Groupe TD éventuel (non utilisé partout mais présent dans le style original) */
+.groupe_td {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+}
+
+/* bloc barème (si besoin dans certaines pages) */
+.bareme {
+    background-color: #ffe5e5; /* rouge clair agréable à lire */
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+    border-left: 4px solid #e74c3c;
+}
+
+.bareme ul,
+.bareme li {
+    line-height: 1.2;
+    margin-bottom: 3px;
+}
+
+/* documents audio / vidéo */
+.documents_audio {
+    background-color: #f7faff;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #dce6f7;
+    margin: 25px 0;
+}
+
+.documents_audio ul {
+    list-style-type: none;
+    margin-left: 0;
+}
+
+.documents_audio li {
+    padding-left: 24px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.documents_audio li:before {
+    content: "▶";
+    position: absolute;
+    left: 0;
+    color: #2c5aa0;
+    font-size: 0.8em;
+    line-height: 1;
+}
+
+/* sitographie (bloc placeholder simple) */
+.sitographie {
+    background-color: #fffef5;
+    border: 1px solid #f0e6b5;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 25px 0;
+    color: #7a6b21;
+    font-style: italic;
+}
+
+/* Texte en gras */
+strong {
+    color: #1a365d;
+    font-weight: 600;
+}
+
+/* Impression */
+@media print {
+    body {
+        background-color: white;
+        padding: 0;
+    }
+    .container {
+        box-shadow: none;
+        padding: 20px;
+        max-width: 100%;
+    }
+    a {
+        color: #000;
+        border-bottom: none;
+        text-decoration: underline;
+    }
+    .support {
+        background-color: transparent;
+        color: #000;
+        border: none;
+        padding: 0;
+        text-decoration: underline;
+    }
+}
+
+/* Responsive design pour mobile */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 25px;
+    }
+    h1 {
+        font-size: 1.6em;
+    }
+    h2 {
+        font-size: 1.3em;
+    }
+    h3 {
+        font-size: 1.15em;
+    }
+    h4 {
+        font-size: 1em;
+    }
+    ul {
+        margin-left: 20px;
+    }
+    .plan_du_cours {
+        padding: 20px;
+    }
+    .bibliographie {
+        padding: 20px;
+    }
+    .documents_audio {
+        padding: 20px;
+    }
+}

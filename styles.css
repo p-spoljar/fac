@@ -1,0 +1,253 @@
+/* ===================== Variables globales ===================== */
+:root {
+  /* Palette ivoire/bruns */
+  --c-ivory:        #f9f3ea;
+  --c-ivory-2:      #fcf7f1;
+  --c-ivory-3:      #f6eee4;
+
+  --c-paper:        #ffffff;
+
+  --c-border:       #e3d6c7;
+  --c-border-2:     #d8c7b5;
+  --c-border-3:     #cdb8a5;
+
+  --c-brown-900:    #3e2723;
+  --c-brown-850:    #3a2a25;
+  --c-brown-800:    #4e342e;
+  --c-brown-750:    #463028;
+  --c-brown-700:    #5d4037;
+
+  --shadow-rgb:     78 52 46;  /* pour rgba(var(--shadow-rgb) / .08) */
+
+  /* Rythme & rayons */
+  --radius:         10px;
+  --radius-sm:      8px;
+  --radius-lg:      12px;
+
+  --gap-xxs:        6px;
+  --gap-xs:         10px;
+  --gap-sm:         12px;
+  --gap-md:         16px;
+  --gap-lg:         18px;
+  --gap-xl:         22px;
+  --gap-2xl:        28px;
+
+  /* Typo */
+  --font-serif:     serif;
+  --fs-xl:          30px;
+  --fs-lg:          24px;
+  --fs-md:          20px;
+  --fs-sm:          18px;
+}
+
+/* ===================== Reset ===================== */
+* { box-sizing: border-box; }
+
+/* ===================== Layout principal (Grid) ===================== */
+.layout {
+  display: grid;
+  grid-template-rows: auto 1fr auto;  /* header auto, centre extensible, footer auto */
+  grid-template-columns: 24% 1fr 5%;
+  grid-template-areas:
+    "header header header"
+    "west   center  east"
+    "footer footer  footer";
+  min-height: 100vh;
+}
+
+/* Conteneur commun */
+.accueilPanel {
+  background: var(--c-ivory);
+  margin-left: 80px;
+  margin-right: 80px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+}
+
+/* Zones nommées */
+.header { grid-area: header; padding: var(--gap-md); }
+.west   { grid-area: west;   padding: var(--gap-sm); }
+.center { grid-area: center; padding: var(--gap-sm) var(--gap-sm) var(--gap-sm) var(--gap-sm); min-height: 0; overflow: auto; }
+.east   { grid-area: east;   padding: var(--gap-sm); }
+.footer { grid-area: footer; padding: var(--gap-sm); }
+
+/* Accueil : cacher west/east et centrer le contenu */
+.layout--home {
+  grid-template-columns: 0 1fr 0;
+  grid-template-areas:
+    "header header header"
+    ".      center  ."
+    "footer footer  footer";
+}
+.layout--home .west,
+.layout--home .east { display: none; }
+
+
+    /* On force la zone centrale à se comporter comme l'ancien ScrollPanel */
+    .htmlPresentation-frame {
+      width: 100%;
+      height: 70vh;        /* hauteur raisonnable : tu peux ajuster */
+      border: none;
+      background: #fff;
+      border-radius: var(--radius, 10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+
+    /* sur mobile on peut augmenter la hauteur disponible */
+    @media (max-width: 768px) {
+      .htmlPresentation-frame {
+        height: 60vh;
+      }
+    }
+
+
+/* ===================== Header ===================== */
+.headerPane {
+  background: var(--c-paper);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: var(--gap-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xxs);
+  align-items: center;
+}
+
+/* Titre principal */
+.lblNom {
+  background: var(--c-ivory-3);
+  color: var(--c-brown-800);
+  font: bolder var(--fs-xl)/1.2 var(--font-serif);
+  padding: 14px 18px;
+  border: 1px solid var(--c-border-2);
+  border-radius: var(--radius);
+  max-width: 980px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 6px 12px rgba(var(--shadow-rgb) / .08);
+}
+
+/* Année universitaire */
+.lblAnneU {
+  background: var(--c-ivory-2);
+  color: var(--c-brown-700);
+  font: italic bold var(--fs-md)/1.2 var(--font-serif);
+  padding: 10px 14px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  max-width: 980px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(var(--shadow-rgb) / .05);
+}
+
+/* ===================== Footer ===================== */
+.footerPanel {
+  background: var(--c-paper);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+.lblAdresse {
+  background: var(--c-ivory-2);
+  color: var(--c-brown-800);
+  font-style: italic;
+  font-size: var(--fs-sm);
+  font-family: var(--font-serif);
+  padding: var(--gap-xxs) var(--gap-sm);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+}
+
+/* ===================== Colonnes & boutons ===================== */
+.verticalMainPanel {
+  padding: var(--gap-2xl);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  background: var(--c-paper);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+}
+
+/* Bouton générique (menus Page Maître / Accueil) */
+.btMenusAccueil {
+  display: inline-block;
+  width: 100%;
+  white-space: normal;
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  font-family: var(--font-serif);
+  line-height: 1.3;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--c-border-2);
+  background: var(--c-paper);
+  color: var(--c-brown-900);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color .15s ease,
+    color .15s ease,
+    box-shadow .15s ease,
+    transform .04s ease,
+    border-color .15s ease;
+}
+
+.btMenusAccueil:hover {
+  background: var(--c-ivory-3);
+  border-color: var(--c-border-3);
+  color: var(--c-brown-850);
+  box-shadow: 0 2px 8px rgba(var(--shadow-rgb) / .08);
+}
+
+.btMenusAccueil:active { transform: translateY(1px); }
+
+/* ---------- Spécifique à la page Accueil ---------- */
+.layout--home .center {
+  display: flex;
+  justify-content: center;
+}
+.layout--home .verticalMainPanel {
+  align-items: center;
+  gap: var(--gap-xl);
+  background: var(--c-paper);
+  max-width: 720px;
+  width: 100%;
+}
+.layout--home .btMenusAccueil {
+  font-size: var(--fs-lg);
+  text-align: center;
+  white-space: normal; /* autorise le retour ligne pour longs titres sur accueil */
+  width: 100%;
+}
+
+/* ===================== Zone de contenu riche ===================== */
+.htmlPresentation {
+  background: var(--c-paper);
+  padding: var(--gap-md);
+  border-radius: var(--radius);
+  border: 1px solid var(--c-border);
+  max-width: 100%;
+  margin-right: 0;
+}
+
+/* ===================== Responsive ===================== */
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 0 1fr 0;
+    grid-template-areas:
+      "header header header"
+      ".      center  ."
+      "footer footer  footer";
+  }
+  .accueilPanel { margin-left: 16px; margin-right: 16px; }
+
+  .lblNom    { font-size: 24px; padding: 14px; }
+  .lblAnneU  { font-size: 18px; padding: 10px; }
+
+  .layout--home .verticalMainPanel { max-width: 100%; }
+  .layout--home .btMenusAccueil    { font-size: 21px; }
+}
