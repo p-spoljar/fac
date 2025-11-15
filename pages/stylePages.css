@@ -30,6 +30,7 @@ h1 {
     margin-bottom: 10px;
     border-bottom: 3px solid #2c5aa0;
     padding-bottom: 10px;
+    text-align:center;
 }
 
 h2 {
@@ -68,6 +69,17 @@ h5 {
     font-style: italic;
     margin-left: 4ch; /* retrait "4 espaces" */
 }
+
+h6 {
+    color: #777;              /* un peu plus clair que le #555 de h5 */
+    font-size: 0.9em;         /* plus petit que h5 (1em) */
+    margin-top: 8px;
+    margin-bottom: 4px;
+    margin-left: 7ch;         /* retrait "5 espaces", après h5 qui est à 4ch */
+    font-weight: 400;         /* moins marqué que h4/h5 */
+    font-style: normal;       /* pour le distinguer du h5 en italique */
+}
+
 
 /* Paragraphes et listes */
 p {
@@ -236,6 +248,7 @@ a:focus {
     margin-bottom: 3px;
 }
 
+/* documents audio */
 /* documents audio / vidéo */
 .documents_audio {
     background-color: #f7faff;
@@ -245,25 +258,50 @@ a:focus {
     margin: 25px 0;
 }
 
+/* liste sans puces natives */
 .documents_audio ul {
     list-style-type: none;
     margin-left: 0;
+    margin-bottom: 0;
 }
 
+/* chaque item = petite “carte” */
 .documents_audio li {
-    padding-left: 24px;
     position: relative;
-    margin-bottom: 8px;
+    margin-bottom: 14px;
+    padding: 10px 12px 12px 32px;  /* un peu plus de marge pour le ▶ */
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    line-height: 1.4;
 }
 
+/* survol léger */
+.documents_audio li:hover {
+    background-color: #f1f5fb;
+    border-color: #cbd5f0;
+}
+
+/* pictogramme ▶ à gauche */
 .documents_audio li:before {
     content: "▶";
     position: absolute;
-    left: 0;
+    left: 10px;
+    top: 12px;
     color: #2c5aa0;
     font-size: 0.8em;
     line-height: 1;
 }
+
+/* le lecteur audio occupe toute la largeur utile */
+.documents_audio audio {
+    display: block;
+    margin-top: 6px;
+    width: 100%;
+    max-width: 500px; /* ajuste si tu veux plus large ou plus étroit */
+}
+
+
 
 /* sitographie (bloc placeholder simple) */
 .sitographie {
@@ -323,6 +361,12 @@ strong {
     }
     h4 {
         font-size: 1em;
+    }
+    h5 {
+        font-size: 0.95em;
+    }
+    h6 {
+        font-size: 0.85em;
     }
     ul {
         margin-left: 20px;
