@@ -33,11 +33,15 @@
   --gap-2xl:        28px;
 
   /* Typo */
-  --font-serif:     serif;
-  --fs-xl:          30px;
-  --fs-lg:          24px;
-  --fs-md:          20px;
-  --fs-sm:          18px;
+  --font-sans-title: system-ui, -apple-system, BlinkMacSystemFont,
+                     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fs-xl:      30px;
+  --fs-lg:      24px;
+  --fs-md:      20px;
+  --fs-sm:      18px;
+}
+
+
 }
 
 /* ===================== Reset ===================== */
@@ -65,7 +69,7 @@
 }
 
 /* Zones nommées */
-.header { grid-area: header; padding: var(--gap-md); }
+.header { grid-area: header; padding: var(--gap-xs); }
 .west   { grid-area: west;   padding: var(--gap-sm); }
 .center { grid-area: center; padding: var(--gap-sm) var(--gap-sm) var(--gap-sm) var(--gap-sm); min-height: 0; overflow: auto; }
 .east   { grid-area: east;   padding: var(--gap-sm); }
@@ -87,6 +91,7 @@
     .htmlPresentation-frame {
       width: 100%;
       height: 70vh;        /* hauteur raisonnable : tu peux ajuster */
+      height: 90vh;        /* hauteur raisonnable : tu peux ajuster */
       border: none;
       background: #fff;
       border-radius: var(--radius, 10px);
@@ -106,7 +111,7 @@
   background: var(--c-paper);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
-  padding: var(--gap-sm);
+  padding: var(--gap-xs);
   display: flex;
   flex-direction: column;
   gap: var(--gap-xxs);
@@ -117,14 +122,21 @@
 .lblNom {
   background: var(--c-ivory-3);
   color: var(--c-brown-800);
-  font: bolder var(--fs-xl)/1.2 var(--font-serif);
-  padding: 14px 18px;
+  font-family: var(--font-sans-title-2);
+  font-weight: 700;
+  font-size: calc(var(--fs-xl) * 0.96);
+  line-height: 1.2;
+  letter-spacing: 0.12em;           /* plus d’espacement pour le côté “titre” */
+  padding: 14px 22px;
   border: 1px solid var(--c-border-2);
-  border-radius: var(--radius);
+  border-radius: calc(var(--radius) * 1.2);
   max-width: 980px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 6px 12px rgba(var(--shadow-rgb) / .08);
+  box-shadow: 0 4px 10px rgba(var(--shadow-rgb) / .10);
+  text-shadow:
+    0 1px 0 rgba(255 255 255 / .8),     /* léger effet embossé */
+    0 2px 3px rgba(var(--shadow-rgb) / .18); /* ombre douce */
 }
 
 /* Année universitaire */
@@ -132,7 +144,7 @@
   background: var(--c-ivory-2);
   color: var(--c-brown-700);
   font: italic bold var(--fs-md)/1.2 var(--font-serif);
-  padding: 10px 14px;
+  padding: 8px 12px;
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   max-width: 980px;
@@ -163,7 +175,8 @@
 
 /* ===================== Colonnes & boutons ===================== */
 .verticalMainPanel {
-  padding: var(--gap-2xl);
+  padding: var(--gap-xl);
+  padding: 2 2 2 2 ;
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
   background: var(--c-paper);
@@ -173,20 +186,22 @@
 }
 
 /* Bouton générique (menus Page Maître / Accueil) */
+
 .btMenusAccueil {
   display: inline-block;
   width: 100%;
   white-space: normal;
-  font-size: var(--fs-lg);
-  font-weight: 700;
-  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 600;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   line-height: 1.3;
-  padding: 14px 18px;
+  padding: 12px 18px;
   border-radius: var(--radius);
   border: 1px solid var(--c-border-2);
-  background: var(--c-paper);
+  background: linear-gradient(to bottom, var(--c-ivory-2), var(--c-ivory-3));
   color: var(--c-brown-900);
   text-align: left;
+  text-decoration: none;
   cursor: pointer;
   transition:
     background-color .15s ease,
@@ -197,13 +212,57 @@
 }
 
 .btMenusAccueil:hover {
-  background: var(--c-ivory-3);
+  background: linear-gradient(to bottom, var(--c-ivory-3), #f0e5d8);
   border-color: var(--c-border-3);
   color: var(--c-brown-850);
-  box-shadow: 0 2px 8px rgba(var(--shadow-rgb) / .08);
+  box-shadow: 0 4px 12px rgba(var(--shadow-rgb) / .12);
 }
 
 .btMenusAccueil:active { transform: translateY(1px); }
+
+
+.btMenusPages {
+  display: inline-block;
+  width: 100%;
+  white-space: normal;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  line-height: 1.3;
+  padding: 4px 4px;
+  border-radius: var(--radius);
+  border: 1px solid var(--c-border-2);
+  background: linear-gradient(to right, var(--c-ivory-2), var(--c-paper));
+  color: var(--c-brown-900);
+  text-align: right;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color .15s ease,
+    color .15s ease,
+    box-shadow .15s ease,
+    transform .04s ease,
+    border-color .15s ease;
+}
+
+.btMenusPages:hover {
+  background: linear-gradient(to right, var(--c-ivory-3), var(--c-ivory-2));
+  border-color: var(--c-border-3);
+  color: var(--c-brown-850);
+  box-shadow: 0 2px 6px rgba(var(--shadow-rgb) / .1);
+}
+
+.btMenusPages:active { 
+  transform: translateY(1px); 
+}
+
+
+
+
+
+
+
+
 
 /* ---------- Spécifique à la page Accueil ---------- */
 .layout--home .center {
@@ -212,7 +271,7 @@
 }
 .layout--home .verticalMainPanel {
   align-items: center;
-  gap: var(--gap-xl);
+  gap: var(--gap-md);
   background: var(--c-paper);
   max-width: 720px;
   width: 100%;
@@ -227,7 +286,7 @@
 /* ===================== Zone de contenu riche ===================== */
 .htmlPresentation {
   background: var(--c-paper);
-  padding: var(--gap-md);
+  padding: var(--gap-xxs);
   border-radius: var(--radius);
   border: 1px solid var(--c-border);
   max-width: 100%;
@@ -249,5 +308,5 @@
   .lblAnneU  { font-size: 18px; padding: 10px; }
 
   .layout--home .verticalMainPanel { max-width: 100%; }
-  .layout--home .btMenusAccueil    { font-size: 21px; }
+  .layout--home .btMenusAccueil    { font-size: 20px; }
 }
