@@ -1,79 +1,46 @@
 <!DOCTYPE html>
-
-  <html lang="fr">
-
+<html lang="fr">
 <head>
-
   <meta charset="UTF-8" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0" />
-  <title>Enseignements — Accueil</title>
-  <link rel="stylesheet" href="stylesFac.css" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enseignements SFU — Accueil</title>
+  <link rel="stylesheet" href="stylesSfu.css" />
 </head>
 
 <body>
-
   <div class="layout layout--home accueilPanel">
 
-
-    <!-- ================= HEADER ================= -->
     <header class="header">
       <div class="headerPane">
         <div class="lblNom">
           <span class="lblNom-principal">Philippe Spoljar</span>
-          <span class="lblNom-secondaire">Enseignements 2025-2026</span>
+          <span class="lblNom-secondaire">Enseignements 2026-2027</span>
         </div>
       </div>
     </header>
 
-    <!-- ================= HEADER =================
-    <header class="header">
-      <div class="headerPane">
-        <div class="lblNom">
-          Philippe Spoljar - Enseignements
-        </div>
-        <div class="lblAnneU">
-          Année universitaire 2025-2026
-        </div>
-      </div>
-    </header>
- -->
-
-
-
-
-
-    <!-- ================= COLONNE CENTRALE ================= -->
     <main class="center">
-      <div class="verticalMainPanel">
-
-        <a class="btMenusAccueil" href="PageMaitre.html?page=pages/PageLS4.html">sémiologie et entités psychopathologiques</a>
-        <a class="btMenusAccueil" href="PageMaitre.html?page=pages/PageLS6.html">observation et étude de cas 2</a>
-        <a class="btMenusAccueil" href="PageMaitre.html?page=pages/PageMS1.html">psychopathologie phénoménologique 1</a>
-        <a class="btMenusAccueil" href="PageMaitre.html?page=pages/PageMS2.html">analyse existentielle 1</a>
-        <a class="btMenusAccueil" href="PageMaitre.html?page=pages/PageMS3.html">psychopathologie phénoménologique 2</a>
-        <a class="btMenusAccueil" href="PageMaitre.html?page=pages/PageMS4.html"> analyse existentielle 2</a>
-        <a class="btMenusAccueil"
-           href="PageMaitre.html?page=pages/PageDocs.html">
-          documents phénoménologie
+      <nav class="verticalMainPanel" aria-label="Liste des enseignements">
+        <a class="btMenusAccueil" href="pageMaitre.html?page=pages/bs6.html">
+          BS6 - Clinique et psychopathologie du travail
         </a>
 
-      </div>
+        <a class="btMenusAccueil" href="pageMaitre.html?page=pages/ms3.html">
+          MS3 : Clinique et psychopathologie phénoménologique II
+        </a>
+
+        <a class="btMenusAccueil" href="pageMaitre.html?page=pages/docs.html">
+          Documents Phénoménologie
+        </a>
+      </nav>
     </main>
 
-    <!-- colonnes west / east sont masquées par .layout--home -->
-
-    <!-- ================= FOOTER ================= -->
     <footer class="footer">
       <div class="footerPanel">
-        <div class="lblAdresse">
-          mail : philippe.spoljar@u-picardie.fr
-        </div>
+        <div class="lblAdresse">mail : philippe.spoljar@u-picardie.fr</div>
       </div>
     </footer>
 
   </div>
-
 </body>
 </html>
