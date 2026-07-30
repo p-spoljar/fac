@@ -1,98 +1,146 @@
 /* ===================== Variables globales ===================== */
+
 :root {
-  /* Palette ivoire/bruns */
-  --c-ivory:        #f9f3ea;
-  --c-ivory-2:      #fcf7f1;
-  --c-ivory-3:      #f6eee4;
+  /* Palette ivoire / bruns */
+  --c-ivory: #f9f3ea;
+  --c-ivory-2: #fcf7f1;
+  --c-ivory-3: #f6eee4;
 
-  --c-paper:        #ffffff;
+  --c-paper: #ffffff;
 
-  --c-border:       #e3d6c7;
-  --c-border-2:     #d8c7b5;
-  --c-border-3:     #cdb8a5;
+  --c-border: #e3d6c7;
+  --c-border-2: #d8c7b5;
+  --c-border-3: #cdb8a5;
 
-  --c-brown-900:    #3e2723;
-  --c-brown-850:    #3a2a25;
-  --c-brown-800:    #4e342e;
-  --c-brown-750:    #463028;
-  --c-brown-700:    #5d4037;
+  --c-brown-900: #3e2723;
+  --c-brown-850: #3a2a25;
+  --c-brown-800: #4e342e;
+  --c-brown-750: #463028;
+  --c-brown-700: #5d4037;
 
-  --shadow-rgb:     78 52 46;  /* pour rgba(var(--shadow-rgb) / .08) */
+  --shadow-rgb: 78 52 46;
 
-  /* Rythme & rayons */
-  --radius:         10px;
-  --radius-sm:      8px;
-  --radius-lg:      12px;
+  /* Rythme et rayons */
+  --radius: 10px;
+  --radius-sm: 8px;
+  --radius-lg: 12px;
 
-  --gap-xxs:        6px;
-  --gap-xs:         10px;
-  --gap-sm:         12px;
-  --gap-md:         16px;
-  --gap-lg:         18px;
-  --gap-xl:         22px;
-  --gap-2xl:        28px;
+  --gap-xxs: 6px;
+  --gap-xs: 10px;
+  --gap-sm: 12px;
+  --gap-md: 16px;
+  --gap-lg: 18px;
+  --gap-xl: 22px;
+  --gap-2xl: 28px;
 
-  /* Typo */
-  --font-sans-title: system-ui, -apple-system, BlinkMacSystemFont,
-                     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Times New Roman", Georgia, "Times", serif;
+  /* Typographie */
+  --font-sans-title:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
 
-  --fs-xl:      30px;
-  --fs-lg:      24px;
-  --fs-md:      20px;
-  --fs-sm:      18px;
+  --font-serif:
+    "Century Schoolbook",
+    "Century Schoolbook L",
+    Constantia,
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  --fs-xl: 30px;
+  --fs-lg: 24px;
+  --fs-md: 20px;
+  --fs-sm: 18px;
 }
 
-/* ===================== Reset ===================== */
+
+/* ===================== Réinitialisation ===================== */
+
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
+  min-height: 100%;
 }
 
-/* ===================== Layout principal (Grid) ===================== */
+body {
+  background: var(--c-ivory-2);
+  color: var(--c-brown-900);
+}
+
+a {
+  color: inherit;
+}
+
+
+/* ===================== Layout principal ===================== */
+
 .layout {
   display: grid;
-  grid-template-rows: auto 1fr auto;  /* header auto, centre extensible, footer auto */
-  grid-template-columns: 24% 1fr 5%;
+
+  grid-template-rows:
+    auto
+    minmax(0, 1fr)
+    auto;
+
+  grid-template-columns:
+    minmax(220px, 24%)
+    minmax(0, 1fr)
+    minmax(20px, 5%);
+
   grid-template-areas:
     "header header header"
-    "west   center  east"
-    "footer footer  footer";
+    "west   center east"
+    "footer footer footer";
+
   min-height: 100vh;
 }
 
+
 /* Conteneur commun */
+
 .accueilPanel {
+  width: calc(100% - 160px);
+  max-width: 1500px;
+  margin: 0 auto;
+
   background: var(--c-ivory);
-  margin-left: 80px;
-  margin-right: 80px;
+
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
 }
 
+
 /* Zones nommées */
+
 .header {
   grid-area: header;
   padding: var(--gap-xs);
 }
 
-.west   {
+.west {
   grid-area: west;
   padding: var(--gap-sm);
 }
 
 .center {
   grid-area: center;
-  padding: var(--gap-sm);
+  min-width: 0;
   min-height: 0;
+  padding: var(--gap-sm);
   overflow: auto;
 }
 
-.east   {
+.east {
   grid-area: east;
   padding: var(--gap-sm);
 }
@@ -102,13 +150,16 @@ html, body {
   padding: var(--gap-sm);
 }
 
-/* Accueil : cacher west/east et centrer le contenu (desktop) */
+
+/* ===================== Accueil ===================== */
+
 .layout--home {
-  grid-template-columns: 0 1fr 0;
+  grid-template-columns: 1fr;
+
   grid-template-areas:
-    "header header header"
-    ".      center  ."
-    "footer footer  footer";
+    "header"
+    "center"
+    "footer";
 }
 
 .layout--home .west,
@@ -116,224 +167,374 @@ html, body {
   display: none;
 }
 
-/* ===================== Iframe (PageMaitre) ===================== */
-/* On force la zone centrale à se comporter comme l'ancien ScrollPanel */
-.htmlPresentation-frame {
+/*
+  Le main occupe toute la zone disponible entre le header et le footer.
+  Son contenu est centré horizontalement et verticalement.
+*/
+
+.layout--home .center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
-  height: 70vh;        /* hauteur raisonnable sur écran "normal" */
-  border: none;
-  background: #fff;
-  border-radius: var(--radius, 10px);
-  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  min-height: 0;
+  padding: var(--gap-2xl);
 }
+
+.layout--home .verticalMainPanel {
+  width: min(720px, 100%);
+  margin: auto;
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+.layout--home .btMenusAccueil {
+  width: 85%;
+  text-align: center;
+}
+
 
 /* ===================== Header ===================== */
+
 .headerPane {
-  background: var(--c-paper);
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius);
-  padding: var(--gap-xs);
   display: flex;
   flex-direction: column;
-  gap: var(--gap-xxs);
   align-items: center;
+  gap: var(--gap-xxs);
+
+  padding: var(--gap-xs);
+
+  background: var(--c-paper);
+
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
 }
 
-/* Titre principal */
 .lblNom {
+  width: 100%;
+  max-width: 980px;
+
+  padding: 12px 18px;
+
   background: var(--c-ivory-3);
   color: var(--c-brown-800);
 
-  /* Century Schoolbook + fallback */
-  font-family:   "Century Schoolbook", "Century Schoolbook L", Georgia, "Times New Roman", serif;
-  font-weight: 600;
-  font-size: var(--fs-xl);
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-
-  padding: 12px 18px;
   border: 1px solid var(--c-border-2);
   border-radius: var(--radius);
-  max-width: 980px;
-  width: 100%;
+
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
   text-align: center;
 
-  box-shadow: 0 6px 12px rgba(var(--shadow-rgb) / .08);
+  box-shadow:
+    0 6px 12px rgba(var(--shadow-rgb) / 0.08);
 
   text-shadow:
-    0 1px 0 rgba(255 255 255 / .7),
-    0 2px 3px rgba(var(--shadow-rgb) / .16);
+    0 1px 0 rgba(255 255 255 / 0.7),
+    0 2px 3px rgba(var(--shadow-rgb) / 0.16);
 }
 
-/* Lignes interne : nom + sous-titre plus petit */
 .lblNom-principal {
   display: block;
-  font-size: var(--fs-xl);  /* 30 px */
+  font-size: var(--fs-xl);
 }
 
 .lblNom-secondaire {
   display: block;
+
   margin-top: 4px;
-  font-size: calc(var(--fs-xl) * 0.7); /* ~21 px */
+
+  font-size: calc(var(--fs-xl) * 0.7);
   font-weight: 500;
 }
 
-/* Année universitaire (si réutilisée) */
+
+/* Année universitaire, si cette classe est réutilisée */
+
 .lblAnneU {
+  width: 100%;
+  max-width: 980px;
+
+  padding: 8px 12px;
+
   background: var(--c-ivory-2);
   color: var(--c-brown-700);
-  font: italic bold var(--fs-md)/1.2 var(--font-serif);
-  padding: 8px 12px;
+
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
-  max-width: 980px;
-  width: 100%;
+
+  font-family: var(--font-serif);
+  font-size: var(--fs-md);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.2;
   text-align: center;
-  box-shadow: 0 3px 8px rgba(var(--shadow-rgb) / .05);
+
+  box-shadow:
+    0 3px 8px rgba(var(--shadow-rgb) / 0.05);
 }
 
+
 /* ===================== Footer ===================== */
+
 .footerPanel {
-  background: var(--c-paper);
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius);
-  padding: 10px;
   display: flex;
   justify-content: center;
+
+  padding: 10px;
+
+  background: var(--c-paper);
+
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
 }
 
 .lblAdresse {
+  padding: var(--gap-xxs) var(--gap-sm);
+
   background: var(--c-ivory-2);
   color: var(--c-brown-800);
-  font-style: italic;
-  font-size: var(--fs-sm);
-  font-family: var(--font-serif);
-  padding: var(--gap-xxs) var(--gap-sm);
+
   border: 1px solid var(--c-border);
   border-radius: var(--radius-sm);
+
+  font-family: var(--font-serif);
+  font-size: var(--fs-sm);
+  font-style: italic;
 }
 
-/* ===================== Colonnes & boutons ===================== */
+.lblAdresse a {
+  text-decoration: none;
+}
+
+.lblAdresse a:hover {
+  text-decoration: underline;
+}
+
+
+/* ===================== Panneaux verticaux ===================== */
+
 .verticalMainPanel {
-  padding: var(--gap-xl);
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius);
-  background: var(--c-paper);
   display: flex;
   flex-direction: column;
   gap: var(--gap-lg);
-}
 
-/* Boutons Accueil */
-.btMenusAccueil {
-  display: inline-block;
-  width: 100%;
-  white-space: normal;
-  font-size: 22px;
-  font-weight: 600;
-  font-family: "Constantia", Georgia, 'Times New Roman', Times, serif;
-  line-height: 1.3;
-  padding: 12px 18px;
+  padding: var(--gap-xl);
+
+  background: var(--c-paper);
+
+  border: 1px solid var(--c-border);
   border-radius: var(--radius);
-  border: 1px solid var(--c-border-2);
-  background: linear-gradient(to bottom, var(--c-ivory-2), var(--c-ivory-3));
-  color: var(--c-brown-900);
-  text-align: left;
-  text-decoration: none;
-  cursor: pointer;
-  transition:
-    background-color .15s ease,
-    color .15s ease,
-    box-shadow .15s ease,
-    transform .04s ease,
-    border-color .15s ease;
 }
 
-.btMenusAccueil:hover {
-  background: linear-gradient(to bottom, var(--c-ivory-3), #f0e5d8);
-  border-color: var(--c-border-3);
+
+/* ===================== Boutons de l'accueil ===================== */
+
+.btMenusAccueil {
+  display: block;
+
+  width: 100%;
+
+  padding: 12px 18px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      var(--c-ivory-2),
+      var(--c-ivory-3)
+    );
+
+  color: var(--c-brown-900);
+
+  border: 1px solid var(--c-border-2);
+  border-radius: var(--radius);
+
+  font-family:
+    Constantia,
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  line-height: 1.3;
+
+  text-align: center;
+  text-decoration: none;
+
+  white-space: normal;
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.04s ease,
+    border-color 0.15s ease;
+}
+
+.btMenusAccueil:hover,
+.btMenusAccueil:focus-visible {
+  background:
+    linear-gradient(
+      to bottom,
+      var(--c-ivory-3),
+      #f0e5d8
+    );
+
   color: var(--c-brown-850);
-  box-shadow: 0 4px 12px rgba(var(--shadow-rgb) / .12);
+  border-color: var(--c-border-3);
+
+  box-shadow:
+    0 4px 12px rgba(var(--shadow-rgb) / 0.12);
 }
 
 .btMenusAccueil:active {
   transform: translateY(1px);
 }
 
-/* Boutons menu PageMaitre */
+
+/* ===================== Menu de PageMaitre ===================== */
+
 .btMenusPages {
-  display: inline-block;
+  display: block;
+
   width: 100%;
-  white-space: normal;
+
+  padding: 8px 10px;
+
+  background:
+    linear-gradient(
+      to right,
+      var(--c-ivory-2),
+      var(--c-paper)
+    );
+
+  color: var(--c-brown-900);
+
+  border: 1px solid var(--c-border-2);
+  border-radius: var(--radius);
+
+  font-family:
+    Constantia,
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: var(--fs-sm);
   font-weight: 600;
-  font-family: "Constantia", Georgia, 'Times New Roman', Times, serif;
   line-height: 1.3;
-  padding: 4px 4px;
-  border-radius: var(--radius);
-  border: 1px solid var(--c-border-2);
-  background: linear-gradient(to right, var(--c-ivory-2), var(--c-paper));
-  color: var(--c-brown-900);
+
   text-align: right;
   text-decoration: none;
+
+  white-space: normal;
   cursor: pointer;
+
   transition:
-    background-color .15s ease,
-    color .15s ease,
-    box-shadow .15s ease,
-    transform .04s ease,
-    border-color .15s ease;
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.04s ease,
+    border-color 0.15s ease;
 }
 
-.btMenusPages:hover {
-  background: linear-gradient(to right, var(--c-ivory-3), var(--c-ivory-2));
-  border-color: var(--c-border-3);
+.btMenusPages:hover,
+.btMenusPages:focus-visible {
+  background:
+    linear-gradient(
+      to right,
+      var(--c-ivory-3),
+      var(--c-ivory-2)
+    );
+
   color: var(--c-brown-850);
-  box-shadow: 0 2px 6px rgba(var(--shadow-rgb) / .1);
+  border-color: var(--c-border-3);
+
+  box-shadow:
+    0 2px 6px rgba(var(--shadow-rgb) / 0.1);
 }
 
 .btMenusPages:active {
   transform: translateY(1px);
 }
 
-/* ---------- Spécifique à la page Accueil ---------- */
-.layout--home .center {
-  display: flex;
-  justify-content: center;
-}
+.btMenusPages--accueil {
+  margin-bottom: var(--gap-xs);
 
-.layout--home .verticalMainPanel {
-  align-items: center;
-  gap: var(--gap-md);
-  background: var(--c-paper);
-  max-width: 720px;
-  width: 100%;
-}
+  background: var(--c-ivory-3);
 
-.layout--home .btMenusAccueil {
-  font-size: var(--fs-lg);
+  font-weight: 700;
   text-align: center;
-  white-space: normal; /* autorise le retour ligne pour longs titres sur accueil */
-  width: 85%;          /* un peu plus étroit sur desktop */
 }
 
-/* ===================== Zone de contenu riche ===================== */
+
+/* ===================== Contenu de PageMaitre ===================== */
+
 .htmlPresentation {
-  background: var(--c-paper);
+  width: 100%;
+  height: 100%;
+  min-height: 70vh;
+
   padding: var(--gap-xxs);
-  border-radius: var(--radius);
+
+  background: var(--c-paper);
+
   border: 1px solid var(--c-border);
-  max-width: 100%;
-  margin-right: 0;
+  border-radius: var(--radius);
 }
+
+.htmlPresentation-frame {
+  display: block;
+
+  width: 100%;
+  height: 75vh;
+  min-height: 500px;
+
+  background: var(--c-paper);
+
+  border: none;
+  border-radius: var(--radius);
+
+  box-shadow:
+    0 2px 8px rgba(0 0 0 / 0.05);
+}
+
+.messageErreur {
+  padding: var(--gap-md);
+  color: var(--c-brown-800);
+  font-family: var(--font-serif);
+  text-align: center;
+}
+
+
+/* ===================== Accessibilité ===================== */
+
+.btMenusAccueil:focus-visible,
+.btMenusPages:focus-visible,
+.lblAdresse a:focus-visible {
+  outline: 3px solid var(--c-border-3);
+  outline-offset: 3px;
+}
+
 
 /* ===================== Responsive ===================== */
+
 @media (max-width: 960px) {
 
-  /* Mise en page générale : une seule colonne, menu au-dessus du contenu */
   .layout {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr auto;
+
+    grid-template-rows:
+      auto
+      auto
+      minmax(0, 1fr)
+      auto;
+
     grid-template-areas:
       "header"
       "west"
@@ -341,12 +542,13 @@ html, body {
       "footer";
   }
 
-  /* Conteneur principal sans grandes marges ni bordures */
   .accueilPanel {
-    margin-left: 0;
-    margin-right: 0;
-    border-radius: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+
     border: none;
+    border-radius: 0;
   }
 
   .headerPane,
@@ -359,48 +561,110 @@ html, body {
     padding: var(--gap-xs);
   }
 
+  .east {
+    display: none;
+  }
+
   .verticalMainPanel {
     padding: var(--gap-md);
     border-radius: 0;
   }
 
   .lblNom {
-    font-size: 24px;
     padding: 14px;
+    font-size: 24px;
+  }
+
+  .lblNom-principal {
+    font-size: 24px;
   }
 
   .lblNom-secondaire {
     font-size: 16px;
   }
 
-  /* Accueil : pas de colonne menu, juste le centre */
+  /* Accueil mobile */
+
   .layout--home {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows:
+      auto
+      minmax(0, 1fr)
+      auto;
+
     grid-template-areas:
       "header"
       "center"
       "footer";
   }
 
+  .layout--home .center {
+    padding: var(--gap-md);
+  }
+
   .layout--home .verticalMainPanel {
-    max-width: 100%;
+    width: 100%;
   }
 
   .layout--home .btMenusAccueil {
+    width: 100%;
     font-size: 20px;
-    width: 100%;   /* plein écran sur téléphone */
   }
 
-  /* Menu cours : texte un peu plus grand et aligné à gauche sur mobile */
+  /* Menu de PageMaitre */
+
   .btMenusPages {
+    padding: 10px 12px;
     font-size: 16px;
     text-align: left;
-    padding: 8px 10px;
   }
 
-  /* Iframe plus raisonnable sur mobile */
+  .btMenusPages--accueil {
+    text-align: center;
+  }
+
+  /* Iframe */
+
+  .htmlPresentation {
+    min-height: 60vh;
+  }
+
   .htmlPresentation-frame {
-    height: 60vh;
+    height: 65vh;
+    min-height: 420px;
+  }
+}
+
+
+@media (max-width: 520px) {
+
+  .header,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .lblNom {
+    border-left: none;
+    border-right: none;
+  }
+
+  .lblAdresse {
+    font-size: 16px;
+    overflow-wrap: anywhere;
+  }
+
+  .layout--home .center {
+    align-items: flex-start;
+    padding-top: var(--gap-xl);
+  }
+
+  .btMenusAccueil {
+    padding: 12px;
+    font-size: 18px;
+  }
+
+  .htmlPresentation-frame {
+    height: 62vh;
+    min-height: 380px;
   }
 }

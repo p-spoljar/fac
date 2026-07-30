@@ -2,12 +2,16 @@
 <html lang="fr">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0" />
-  <title>Enseignements — Cours</title>
-  <link rel="stylesheet" href="stylesFac.css" />
+  <meta charset="UTF-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Enseignements — Cours</title>
+
+  <link rel="stylesheet" href="stylesFac.css">
 </head>
 
 <body>
@@ -18,70 +22,98 @@
     <header class="header">
       <div class="headerPane">
         <div class="lblNom">
-          <span class="lblNom-principal">Philippe Spoljar</span>
-          <span class="lblNom-secondaire">Enseignements 2025-2026</span>
+          <span class="lblNom-principal">
+            Philippe Spoljar
+          </span>
+
+          <span class="lblNom-secondaire">
+            Enseignements 2026-2027
+          </span>
         </div>
       </div>
     </header>
 
-    <!-- ================= COLONNE OUEST (MENU) ================= -->
+    <!-- ================= COLONNE OUEST : MENU ================= -->
     <aside class="west">
-      <div class="verticalMainPanel">
-
-        <!-- accueil -->
-        <a class="btMenusPages" href="index.html">
-          accueil
+      <nav
+        class="verticalMainPanel"
+        aria-label="Navigation des enseignements"
+      >
+        <a
+          class="btMenusPages btMenusPages--accueil"
+          href="index.html"
+        >
+          Accueil
         </a>
 
-        <a class="btMenusPages" href="PageMaitre.html?page=pages/PageLS4.html">sémiologie et entités psychopathologiques</a>
-        <a class="btMenusPages" href="PageMaitre.html?page=pages/PageLS6.html"> observation et étude de cas 2 </a>
-        <a class="btMenusPages" href="PageMaitre.html?page=pages/PageMS1.html"> psychopathologie phénoménologique 1 </a>
-        <a class="btMenusPages" href="PageMaitre.html?page=pages/PageMS2.html"> analyse existentielle 1 </a>
-        <a class="btMenusPages" href="PageMaitre.html?page=pages/PageMS3.html"> psychopathologie phénoménologique 2 </a>
-        <a class="btMenusPages" href="PageMaitre.html?page=pages/PageMS4.html"> analyse existentielle 2 </a>
-        <a class="btMenusPages" href="PageMaitre.html?page=pages/PageDocs.html"> documents phénoménologie </a>
-      </div>
+        <a
+          class="btMenusPages"
+          href="PageMaitre.html?page=pages/PageLS4.html" >L2 - Sémiologie et entités psychopathologiques
+        </a>
+
+        <a class="btMenusPages" href="PageMaitre.html?page=pages/PageLS6.html" >L3 - Observation et étude de cas 2
+        </a>
+
+        <a class="btMenusPages" href="PageMaitre.html?page=pages/PageDocs.html" >Documents phénoménologie</a>
+      </nav>
     </aside>
-
-
 
     <!-- ================= CONTENU CENTRAL ================= -->
     <main class="center">
       <div class="htmlPresentation">
+
         <iframe
           id="coursFrame"
           class="htmlPresentation-frame"
-          src=""
+          src="about:blank"
           title="Contenu du cours"
         ></iframe>
 
         <noscript>
-          Activez JavaScript pour afficher le contenu du cours automatiquement.
+          <p class="messageErreur">
+            Activez JavaScript pour afficher automatiquement le contenu du cours.
+          </p>
         </noscript>
+
       </div>
     </main>
 
     <!-- ================= COLONNE EST ================= -->
-    <aside class="east">
-      <!-- Rien pour l'instant -->
-    </aside>
+    <aside class="east" aria-hidden="true"></aside>
 
     <!-- ================= FOOTER ================= -->
     <footer class="footer">
       <div class="footerPanel">
         <div class="lblAdresse">
-          mail : philippe.spoljar@u-picardie.fr
+          mail :
+          <a href="mailto:philippe.spoljar@u-picardie.fr">
+            philippe.spoljar@u-picardie.fr
+          </a>
         </div>
       </div>
     </footer>
 
   </div>
 
-  <!-- Script minimal : charge la page du cours dans l'iframe -->
   <script>
     (function () {
+      "use strict";
+
+      const pagesAutorisees = new Set([
+        "pages/PageLS4.html",
+        "pages/PageLS6.html",
+        "pages/PageDocs.html"
+      ]);
+
       const params = new URLSearchParams(window.location.search);
-      document.getElementById("coursFrame").src = params.get("page");
+      const pageDemandee = params.get("page");
+      const iframe = document.getElementById("coursFrame");
+
+      if (pageDemandee && pagesAutorisees.has(pageDemandee)) {
+        iframe.src = pageDemandee;
+      } else {
+        iframe.src = "pages/PageLS4.html";
+      }
     })();
   </script>
 
