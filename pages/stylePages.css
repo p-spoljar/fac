@@ -383,3 +383,24 @@ strong {
         padding: 20px;
     }
 }
+
+/* Plan du cours : retraits selon le niveau de titre */
+.plan-cours p {
+    margin-bottom: 6px;
+}
+
+.plan-cours .plan-niveau-1 {
+    margin-left: 0;
+    margin-top: 14px;
+    font-weight: 600;
+    color: #1a365d;
+}
+
+.plan-cours .plan-niveau-2 {
+    margin-left: 3ch;
+}
+
+.plan-cours .plan-niveau-3 {
+    margin-left: 6ch;
+}
+
